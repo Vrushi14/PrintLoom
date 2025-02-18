@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prints - PrintLoom</title>
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <link rel="stylesheet" href="/src/styles/prints.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon">
+                    <path d="M6 9V2h12v7"></path>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <path d="M6 14h12v8H6z"></path>
+                </svg>
+                <span>PrintLoom</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/prints.html" class="active">Prints</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="/login.html" class="login-btn">Login</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Prints Hero -->
+    <header class="prints-hero">
+        <div class="prints-hero-content">
+            <h1>Print Services</h1>
+            <p>Fast, reliable, and eco-friendly printing solutions</p>
+        </div>
+    </header>
+
+    <!-- Print Services -->
+    <section class="print-services">
+        <div class="services-grid">
+            <!-- Upload Section -->
+            <div class="service-card upload-card">
+                <div class="service-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                </div>
+                <h2>Upload Files</h2>
+                <p>Drag and drop your files here or click to browse</p>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.txt">
+                    <div class="upload-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p>Drop files here or click to select</p>
+                    </div>
+                </div>
+                <div class="upload-options">
+                    <div class="option">
+                        <label for="printType">Print Type:</label>
+                        <select id="printType">
+                            <option value="bw">Black & White</option>
+                            <option value="color">Color</option>
+                        </select>
+                    </div>
+                    <div class="option">
+                        <label for="paperSize">Paper Size:</label>
+                        <select id="paperSize">
+                            <option value="a4">A4</option>
+                            <option value="a3">A3</option>
+                            <option value="letter">Letter</option>
+                        </select>
+                    </div>
+                    <div class="option">
+                        <label for="copies">Copies:</label>
+                        <input type="number" id="copies" min="1" value="1">
+                    </div>
+                    <div class="option">
+                        <label for="doubleSided">Double-sided:</label>
+                        <input type="checkbox" id="doubleSided">
+                    </div>
+                </div>
+                <button class="submit-print">Submit Print Job</button>
+            </div>
+
+            <!-- Track Prints Section -->
+            <div class="service-card track-card">
+                <div class="service-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+                <h2>Track Prints</h2>
+                <div class="track-search">
+                    <input type="text" placeholder="Enter job number" id="trackInput">
+                    <button id="trackButton">Track</button>
+                </div>
+                <div class="active-prints">
+                    <h3>Active Print Jobs</h3>
+                    <div class="print-job">
+                        <div class="job-info">
+                            <span class="job-number">#12345</span>
+                            <span class="job-name">Document.pdf</span>
+                        </div>
+                        <div class="job-status">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 75%"></div>
+                            </div>
+                            <span class="status-text">Processing</span>
+                        </div>
+                    </div>
+                    <div class="print-job">
+                        <div class="job-info">
+                            <span class="job-number">#12346</span>
+                            <span class="job-name">Report.docx</span>
+                        </div>
+                        <div class="job-status">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 25%"></div>
+                            </div>
+                            <span class="status-text">Queued</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Print History Section -->
+            <div class="service-card history-card">
+                <div class="service-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </div>
+                <h2>Print History</h2>
+                <div class="history-filters">
+                    <select id="timeFilter">
+                        <option value="week">Last Week</option>
+                        <option value="month">Last Month</option>
+                        <option value="year">Last Year</option>
+                    </select>
+                    <input type="text" placeholder="Search prints" id="searchHistory">
+                </div>
+                <div class="history-list">
+                    <div class="history-item">
+                        <div class="history-details">
+                            <span class="history-date">2024-01-15</span>
+                            <span class="history-name">Assignment.pdf</span>
+                            <span class="history-pages">5 pages</span>
+                        </div>
+                        <button class="reprint-btn">Reprint</button>
+                    </div>
+                    <div class="history-item">
+                        <div class="history-details">
+                            <span class="history-date">2024-01-14</span>
+                            <span class="history-name">Presentation.pdf</span>
+                            <span class="history-pages">12 pages</span>
+                        </div>
+                        <button class="reprint-btn">Reprint</button>
+                    </div>
+                    <div class="history-item">
+                        <div class="history-details">
+                            <span class="history-date">2024-01-13</span>
+                            <span class="history-name">Notes.docx</span>
+                            <span class="history-pages">3 pages</span>
+                        </div>
+                        <button class="reprint-btn">Reprint</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9V2h12v7"></path>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <path d="M6 14h12v8H6z"></path>
+                    </svg>
+                    <span>PrintLoom</span>
+                </div>
+                <p>Effortless campus printing solutions for students and faculty.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/prints.html">Print Services</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul>
+                    <li>Document Printing</li>
+                    <li>Color Printing</li>
+                    <li>Large Format</li>
+                    <li>Custom Projects</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul class="contact-info">
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span>support@printloom.com</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>+1 (555) 123-4567</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>University Campus, Building A</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 PrintLoom. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/src/js/main.js"></script>
+    <script src="/src/js/prints.js"></script>
+</body>
+</html>

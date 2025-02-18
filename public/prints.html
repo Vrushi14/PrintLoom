@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prints - PrintLoom</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Prints specific styles */
+        .prints-hero {
+            height: 300px;
+            background-image: url('https://images.unsplash.com/photo-1562564055-71e051d33c19?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            margin-top: 64px;
+        }
+
+        .prints-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .print-services {
+            max-width: var(--max-width);
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-area {
+            border: 2px dashed #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .upload-area:hover,
+        .upload-area.drag-over {
+            border-color: var(--primary-color);
+        }
+
+        .upload-area input[type="file"] {
+            display: none;
+        }
+
+        .upload-placeholder {
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .upload-placeholder svg {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
+        }
+
+        .print-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .option {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .option label {
+            font-size: 0.875rem;
+            color: var(--text-color);
+        }
+
+        .option select,
+        .option input[type="number"] {
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .print-jobs {
+            margin-top: 2rem;
+        }
+
+        .job-card {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-info {
+            flex: 1;
+        }
+
+        .job-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-processing {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-completed {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .print-history {
+            margin-top: 3rem;
+        }
+
+        .history-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .history-filters select,
+        .history-filters input {
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .history-table th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .print-options {
+                grid-template-columns: 1fr;
+            }
+
+            .history-filters {
+                flex-direction: column;
+            }
+
+            .history-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9V2h12v7"></path>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <path d="M6 14h12v8H6z"></path>
+                </svg>
+                <span>PrintLoom</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/prints.html" class="active">Prints</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="/login.html" class="login-btn" id="loginBtn">Login</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="prints-hero">
+        <div class="hero-content">
+            <h1>Print Services</h1>
+            <p>Fast, reliable, and eco-friendly printing solutions</p>
+        </div>
+    </header>
+
+    <!-- Print Services Section -->
+    <section class="print-services">
+        <div class="services-grid">
+            <!-- Upload Section -->
+            <div class="service-card">
+                <h2>Upload Files</h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.txt">
+                    <div class="upload-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p>Drop files here or click to select</p>
+                    </div>
+                </div>
+
+                <div class="print-options">
+                    <div class="option">
+                        <label for="printType">Print Type</label>
+                        <select id="printType">
+                            <option value="bw">Black & White</option>
+                            <option value="color">Color</option>
+                        </select>
+                    </div>
+                    <div class="option">
+                        <label for="paperSize">Paper Size</label>
+                        <select id="paperSize">
+                            <option value="a4">A4</option>
+                            <option value="a3">A3</option>
+                            <option value="letter">Letter</option>
+                            <option value="legal">Legal</option>
+                        </select>
+                    </div>
+                    <div class="option">
+                        <label for="copies">Copies</label>
+                        <input type="number" id="copies" min="1" value="1">
+                    </div>
+                    <div class="option">
+                        <label for="doubleSided">Double-sided</label>
+                        <select id="doubleSided">
+                            <option value="single">Single-sided</option>
+                            <option value="double">Double-sided</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button" id="submitPrint">Submit Print Job</button>
+            </div>
+
+            <!-- Active Jobs Section -->
+            <div class="service-card">
+                <h2>Active Print Jobs</h2>
+                <div class="print-jobs" id="activeJobs">
+                    <!-- Jobs will be populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Print History -->
+        <div class="print-history">
+            <h2>Print History</h2>
+            <div class="history-filters">
+                <select id="timeFilter">
+                    <option value="all">All Time</option>
+                    <option value="week">Last Week</option>
+                    <option value="month">Last Month</option>
+                    <option value="year">Last Year</option>
+                </select>
+                <input type="text" id="searchHistory" placeholder="Search prints...">
+            </div>
+            <div class="history-table-container">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>File Name</th>
+                            <th>Type</th>
+                            <th>Pages</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <!-- History will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script src="/js/main.js"></script>
+    <script>
+        // File Upload Handling
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', () => {
+            handleFiles(fileInput.files);
+        });
+
+        function handleFiles(files) {
+            const placeholder = document.querySelector('.upload-placeholder p');
+            const fileNames = Array.from(files).map(file => file.name).join(', ');
+            placeholder.textContent = fileNames || 'Drop files here or click to select';
+        }
+
+        // Print Job Submission
+        document.getElementById('submitPrint').addEventListener('click', async () => {
+            const formData = new FormData();
+            const files = fileInput.files;
+
+            if (!files.length) {
+                alert('Please select at least one file to print');
+                return;
+            }
+
+            for (let file of files) {
+                formData.append('files[]', file);
+            }
+
+            formData.append('printType', document.getElementById('printType').value);
+            formData.append('paperSize', document.getElementById('paperSize').value);
+            formData.append('copies', document.getElementById('copies').value);
+            formData.append('doubleSided', document.getElementById('doubleSided').value);
+
+            try {
+                const response = await fetch('/api/print', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    alert('Print job submitted successfully!');
+                    loadActiveJobs();
+                    fileInput.value = '';
+                    document.querySelector('.upload-placeholder p').textContent = 'Drop files here or click to select';
+                } else {
+                    alert('Failed to submit print job');
+                }
+            } catch (error) {
+                console.error('Error submitting print job:', error);
+                alert('Error submitting print job');
+            }
+        });
+
+        // Load Active Jobs
+        async function loadActiveJobs() {
+            try {
+                const response = await fetch('/api/jobs');
+                const jobs = await response.json();
+                
+                const activeJobsContainer = document.getElementById('activeJobs');
+                activeJobsContainer.innerHTML = '';
+
+                jobs.forEach(job => {
+                    const jobElement = document.createElement('div');
+                    jobElement.className = 'job-card';
+                    jobElement.innerHTML = `
+                        <div class="job-info">
+                            <h3>${job.filename}</h3>
+                            <p>Submitted: ${new Date(job.createdAt).toLocaleString()}</p>
+                        </div>
+                        <span class="job-status status-${job.status}">${job.status}</span>
+                    `;
+                    activeJobsContainer.appendChild(jobElement);
+                });
+            } catch (error) {
+                console.error('Error loading active jobs:', error);
+            }
+        }
+
+        // Load Print History
+        async function loadPrintHistory() {
+            try {
+                const response = await fetch('/api/jobs/history');
+                const history = await response.json();
+                
+                const historyTableBody = document.getElementById('historyTableBody');
+                historyTableBody.innerHTML = '';
+
+                history.forEach(job => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${new Date(job.createdAt).toLocaleDateString()}</td>
+                        <td>${job.filename}</td>
+                        <td>${job.options.printType}</td>
+                        <td>${job.pages}</td>
+                        <td><span class="job-status status-${job.status}">${job.status}</span></td>
+                        <td>
+                            <button class="reprint-btn" data-job-id="${job.id}">Reprint</button>
+                        </td>
+                    `;
+                    historyTableBody.appendChild(row);
+                });
+
+                // Add reprint functionality
+                document.querySelectorAll('.reprint-btn').forEach(btn => {
+                    btn.addEventListener('click', async () => {
+                        const jobId = btn.dataset.jobId;
+                        try {
+                            const response = await fetch(`/api/jobs/${jobId}/reprint`, {
+                                method: 'POST'
+                            });
+                            const data = await response.json();
+                            if (data.success) {
+                                alert('Print job resubmitted successfully!');
+                                loadActiveJobs();
+                            } else {
+                                alert('Failed to resubmit print job');
+                            }
+                        } catch (error) {
+                            console.error('Error reprinting job:', error);
+                            alert('Error reprinting job');
+                        }
+                    });
+                });
+            } catch (error) {
+                console.error('Error loading print history:', error);
+            }
+        }
+
+        // Initial load
+        loadActiveJobs();
+        loadPrintHistory();
+
+        // Filter and search functionality
+        document.getElementById('timeFilter').addEventListener('change', loadPrintHistory);
+        document.getElementById('searchHistory').addEventListener('input', loadPrintHistory);
+    </script>
+</body>
+</html>
